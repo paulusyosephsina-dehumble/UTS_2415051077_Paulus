@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'detail_screen.dart';
 
 class ResponsiveCatalogScreen extends StatelessWidget {
   const ResponsiveCatalogScreen({super.key});
@@ -23,6 +24,7 @@ class ResponsiveCatalogScreen extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
+          // Wide layout: layar lebih dari 600 piksel
           if (constraints.maxWidth > 600) {
             return GridView.builder(
               padding: const EdgeInsets.all(16),
@@ -45,6 +47,9 @@ class ResponsiveCatalogScreen extends StatelessWidget {
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image);
+                      },
                     ),
                     title: Text(
                       item['title']!,
@@ -57,13 +62,25 @@ class ResponsiveCatalogScreen extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            title: item['title']!,
+                            description: item['subtitle']!,
+                            imageUrl: item['image']!,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
             );
           }
 
+          // Compact layout: layar 600 piksel atau kurang
           return ListView.builder(
             padding: const EdgeInsets.all(8),
             itemCount: items.length,
@@ -84,6 +101,9 @@ class ResponsiveCatalogScreen extends StatelessWidget {
                       width: 60,
                       height: 60,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Icon(Icons.broken_image);
+                      },
                     ),
                   ),
                   title: Text(
@@ -101,7 +121,18 @@ class ResponsiveCatalogScreen extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     size: 14,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(
+                          title: item['title']!,
+                          description: item['subtitle']!,
+                          imageUrl: item['image']!,
+                        ),
+                      ),
+                    );
+                  },
                 ),
               );
             },
