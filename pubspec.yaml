@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.2.0        # Untuk melakukan request REST API (GET)
+  provider: ^6.1.1    # Untuk State Management ChangeNotifier 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
