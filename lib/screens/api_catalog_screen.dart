@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/post_provider.dart';
 
 class ApiCatalogScreen extends StatefulWidget {
-  const ApiCatalogScreen({Key? key}) : super(key: key);
+  const ApiCatalogScreen({super.key});
 
   @override
   State<ApiCatalogScreen> createState() => _ApiCatalogScreenState();
