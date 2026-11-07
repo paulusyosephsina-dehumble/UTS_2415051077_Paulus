@@ -3,29 +3,42 @@ import 'package:flutter/material.dart';
 class StatusBadgeWidget extends StatelessWidget {
   final String text;
   final Color color;
+  final IconData? icon;
+  final double fontSize;
 
   const StatusBadgeWidget({
     super.key,
     required this.text,
-    this.color = Colors.green,
+    this.color = Colors.teal,
+    this.icon,
+    this.fontSize = 11,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15), // Mengganti withOpacity
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color, width: 1),
+        color: color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: color.withOpacity(0.6), width: 1),
       ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color,
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) ...[
+            Icon(icon, size: fontSize + 2, color: color),
+            const SizedBox(width: 4),
+          ],
+          Text(
+            text,
+            style: TextStyle(
+              color: color,
+              fontSize: fontSize,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }
