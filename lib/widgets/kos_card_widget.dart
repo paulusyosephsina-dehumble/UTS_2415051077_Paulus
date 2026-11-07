@@ -98,7 +98,7 @@ class KosCardWidget extends StatelessWidget {
                       final isSaved = savedProvider.isSaved(kos.id);
                       return CircleAvatar(
                         radius: 18,
-                        backgroundColor: Colors.white.withOpacity(0.9),
+                        backgroundColor: Colors.white.withValues(alpha: 0.9),
                         child: IconButton(
                           padding: EdgeInsets.zero,
                           iconSize: 20,
@@ -113,9 +113,11 @@ class KosCardWidget extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    isSaved
-                                        ? '${kos.name} dihapus dari Favorit.'
-                                        : '${kos.name} disimpan ke Favorit!',
+                                    success
+                                        ? (isSaved
+                                            ? '${kos.name} dihapus dari Favorit.'
+                                            : '${kos.name} disimpan ke Favorit!')
+                                        : 'Gagal memperbarui status favorit.',
                                   ),
                                   duration: const Duration(seconds: 2),
                                   backgroundColor:

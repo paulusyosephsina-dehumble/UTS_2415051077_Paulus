@@ -68,7 +68,7 @@ class DashboardScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.indigo.withOpacity(0.3),
+                        color: Colors.indigo.withValues(alpha: 0.3),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -81,7 +81,7 @@ class DashboardScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 24,
-                            backgroundColor: Colors.white.withOpacity(0.2),
+                            backgroundColor: Colors.white.withValues(alpha: 0.2),
                             child: const Icon(Icons.person,
                                 color: Colors.white, size: 28),
                           ),
@@ -346,7 +346,7 @@ class DashboardScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 16,
-                    backgroundColor: color.withOpacity(0.15),
+                    backgroundColor: color.withValues(alpha: 0.15),
                     child: Icon(icon, size: 18, color: color),
                   ),
                   const Icon(Icons.arrow_forward_ios, size: 12, color: Colors.grey),

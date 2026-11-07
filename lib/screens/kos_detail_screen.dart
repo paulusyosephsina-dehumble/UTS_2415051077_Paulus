@@ -296,8 +296,12 @@ class KosDetailScreen extends StatelessWidget {
                         final success = await savedProvider.toggleSaveKos(kos);
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Kos dihapus dari daftar favorit.'),
+                            SnackBar(
+                              content: Text(
+                                success
+                                    ? 'Kos dihapus dari daftar favorit.'
+                                    : 'Gagal menghapus kos dari favorit.',
+                              ),
                             ),
                           );
                         }

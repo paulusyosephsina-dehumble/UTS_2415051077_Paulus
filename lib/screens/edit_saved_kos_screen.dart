@@ -200,7 +200,7 @@ class _EditSavedKosScreenState extends State<EditSavedKosScreen> {
                   Expanded(
                     flex: 2,
                     child: DropdownButtonFormField<String>(
-                      value: _selectedType,
+                      initialValue: _selectedType,
                       decoration: const InputDecoration(
                         labelText: 'Tipe Kos',
                         border: OutlineInputBorder(),
