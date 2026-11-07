@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'responsive_catalog_screen.dart';
-import 'api_catalog_screen.dart';
-import 'add_screen.dart';
+import 'dashboard_screen.dart';
+import 'kos_list_screen.dart';
+import 'favorites_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,84 +14,119 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const HomeDashboardContent(),
-    const ResponsiveCatalogScreen(),
-    const ApiCatalogScreen(),
-    const AddScreen(),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedItemColor: Colors.indigo,
-        unselectedItemColor: Colors.grey,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.grid_view),
-            label: 'Responsif',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cloud_download),
-            label: 'API List',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: 'Tambah',
-          ),
-        ],
-      ),
-    );
+  void _onTabSelected(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
-}
-
-class HomeDashboardContent extends StatelessWidget {
-  const HomeDashboardContent({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Dashboard UTS - Mobile'),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.phone_android, size: 80, color: Colors.indigo),
-              const SizedBox(height: 20),
-              const Text(
-                'Selamat Datang di Aplikasi UTS Mobile',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+    final List<Widget> pages = [
+      DashboardScreen(onNavigateToTab: _onTabSelected),
+      const KosListScreen(),
+      FavoritesScreen(onNavigateToTab: _onTabSelected),
+      const ProfileScreen(),
+    ];
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Wide / Expanded Layout (>= 600px) menggunakan NavigationRail
+        if (constraints.maxWidth >= 600) {
+          return Scaffold(
+            body: Row(
+              children: [
+                NavigationRail(
+                  selectedIndex: _currentIndex,
+                  onDestinationSelected: _onTabSelected,
+                  labelType: NavigationRailLabelType.all,
+                  leading: const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.indigo,
+                      foregroundColor: Colors.white,
+                      child: Icon(Icons.apartment),
+                    ),
+                  ),
+                  selectedIconTheme: const IconThemeData(color: Colors.indigo),
+                  selectedLabelTextStyle: const TextStyle(
+                    color: Colors.indigo,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  destinations: const [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.dashboard_outlined),
+                      selectedIcon: Icon(Icons.dashboard),
+                      label: Text('Dashboard'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.holiday_village_outlined),
+                      selectedIcon: Icon(Icons.holiday_village),
+                      label: Text('Katalog Kos'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.bookmark_border),
+                      selectedIcon: Icon(Icons.bookmark),
+                      label: Text('Favorit DB'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.person_outline),
+                      selectedIcon: Icon(Icons.person),
+                      label: Text('Profil'),
+                    ),
+                  ],
+                ),
+                const VerticalDivider(thickness: 1, width: 1),
+                Expanded(
+                  child: IndexedStack(
+                    index: _currentIndex,
+                    children: pages,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+
+        // Compact Layout (< 600px) menggunakan BottomNavigationBar
+        return Scaffold(
+          body: IndexedStack(
+            index: _currentIndex,
+            children: pages,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _currentIndex,
+            onTap: _onTabSelected,
+            selectedItemColor: Colors.indigo,
+            unselectedItemColor: Colors.grey.shade600,
+            type: BottomNavigationBarType.fixed,
+            selectedFontSize: 12,
+            unselectedFontSize: 11,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.dashboard_outlined),
+                activeIcon: Icon(Icons.dashboard),
+                label: 'Dashboard',
               ),
-              const SizedBox(height: 10),
-              const Text(
-                'Nama: Paulus Yoseph Sina\nNIM: 2415051077',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-                textAlign: TextAlign.center,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.holiday_village_outlined),
+                activeIcon: Icon(Icons.holiday_village),
+                label: 'Katalog',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bookmark_border),
+                activeIcon: Icon(Icons.bookmark),
+                label: 'Favorit',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
+                activeIcon: Icon(Icons.person),
+                label: 'Profil',
               ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
