@@ -219,8 +219,8 @@ lib/
 - **REST API yang digunakan:** GitHub Raw Hosted REST API Endpoint (`https://raw.githubusercontent.com/paulusyosephsina-dehumble/UTS_2415051077_Paulus/main/assets/data/kos_api.json`) dengan parsing JSON model Dart & Offline Fallback Dataset.
 - **Backend/Database yang digunakan:** SQLite Database (`kosfinder_database.db`) via `sqflite` & `sqflite_common_ffi` dengan tabel `saved_kos` (10 field kolom, operasi CRUD lengkap).
 - **Jumlah Screen:** 7 Screen Fungsional (`DashboardScreen`, `KosListScreen`, `KosDetailScreen`, `FavoritesScreen`, `AddSavedKosScreen`, `EditSavedKosScreen`, `ProfileScreen`).
-- **Jumlah Meaningful Commit:** 19 Commit Terstruktur.
-- **Hash Commit Final:** `ebd5125`
+- **Jumlah Meaningful Commit:** 20 Commit Terstruktur.
+- **Hash Commit Final:** `b84e37c`
 - **Link APK / File APK:** `UTS_2415051077_Paulus.apk` (Tersedia pada root folder proyek: `d:\KULIAH\SEMESTER 5\Pemrograman Berbasis Mobile\UTS dan UAS\uts_2415051077_paulus\UTS_2415051077_Paulus.apk` serta pada direktori build `build\app\outputs\flutter-apk\app-release.apk`).
 - **Catatan kendala utama:**
   1. *Penanganan Cross-Drive Incremental Build pada Android Gradle*: Terjadi kendala pembacaan root file berbeda antara drive `C:\` (Pub Cache) dan `D:\` (Folder Proyek) pada kompilasi Kotlin, yang berhasil diselesaikan secara tuntas dengan menyetel `kotlin.incremental=false` pada file `android/gradle.properties`.
