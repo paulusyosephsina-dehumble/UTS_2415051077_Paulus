@@ -196,7 +196,8 @@ Aplikasi secara dinamis beradaptasi berdasarkan lebar layar:
 | 14 | `16e3ea6` | Add responsive MainNavigation with NavigationRail and user Profile screen | Responsive NavRail & Profile |
 | 15 | `e9a05ba` | Configure MultiProvider injection and application entry point | MultiProvider Injection |
 | 16 | `6020018` | Refactor codebase to remove legacy templates and enhance UI responsiveness | Code Refinement & Lint Fix |
-| 17 | *(Final)* | Finalize UTS mobile application and complete comprehensive README documentation | Finalization & README |
+| 17 | `a84b73d` | Finalize UTS mobile application and complete comprehensive README documentation | Finalization & README |
+| 18 | `c547330` | Optimize Gradle build configurations and clean gitignore | Gradle Build Optimization |
 
 ---
 
